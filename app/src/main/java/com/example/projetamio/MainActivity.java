@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projetamio.requests.GetLights;
+import com.example.projetamio.services.MainService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public void registerListener() {
         ToggleButton tb1 = findViewById(R.id.BTN1);
         TextView tv2 = findViewById(R.id.TV2);
-        Button btnRequete = findViewById(R.id.STATICBTN1);
+        // Button btnRequete = findViewById(R.id.STATICBTN1);
         CheckBox cbStartAtBoot = findViewById(R.id.CBSTARTATBOOT);
 
         tb1.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -51,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnRequete.setOnClickListener(v -> {
-            GetLights getLights = new GetLights(this);
-            getLights.execute();
-        });
+        /** btnRequete.setOnClickListener(v -> {
+         GetLights getLights = new GetLights(this);
+         getLights.execute();
+         });*/
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();

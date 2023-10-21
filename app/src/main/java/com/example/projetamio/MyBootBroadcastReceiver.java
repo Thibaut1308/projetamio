@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.TextView;
+
+import com.example.projetamio.services.MainService;
 
 public class MyBootBroadcastReceiver extends BroadcastReceiver {
 
