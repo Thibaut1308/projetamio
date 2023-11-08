@@ -30,8 +30,8 @@
         android:id="@+id/TV5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="137dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="128dp"
         android:text="Last alert:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="290dp"
         android:layout_marginTop="88dp"
-        android:text="Arrêté"
+        android:text="None"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,9 +60,11 @@
         android:id="@+id/TV6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="137dp"
-        android:text="Arrêté"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="84dp"
+        android:text="None"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,34 +93,77 @@
         android:layout_width="172dp"
         android:layout_height="75dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="209dp"
-        android:layout_marginEnd="231dp"
-        android:layout_marginBottom="490dp"
+        android:layout_marginBottom="106dp"
         android:text="Start at boot"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/STATICBTN1"
+    <TextView
+        android:id="@+id/TVMOTE153111"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="300dp"
-        android:text="GET LIGHTS"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TVLIGHTS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="452dp"
-        android:text="Lights: NO VALUE"
+        android:layout_marginBottom="500dp"
+        android:text="Mote 153.111 :"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMOTE8177"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="480dp"
+        android:text="Mote 81.77 :"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMOTE9138"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="460dp"
+        android:text="Mote 9.138 :"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMOTE153111RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="No value"
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE153111"
+        app:layout_constraintTop_toTopOf="@+id/TVMOTE153111" />
+
+    <TextView
+        android:id="@+id/TVMOTE8177RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="No value"
+        app:layout_constraintStart_toStartOf="@+id/TVMOTE153111RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE153111RESULT" />
+
+    <TextView
+        android:id="@+id/TVMOTE9138RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="No value"
+        app:layout_constraintStart_toStartOf="@+id/TVMOTE8177RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE153111RESULT" />
+
+    <TextView
+        android:id="@+id/LIGHTTITLE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="21dp"
+        android:text="LIGHTS"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/TVMOTE153111"
+        app:layout_constraintStart_toStartOf="@+id/TVMOTE153111" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.example.projetamio.objects;
 
+import androidx.annotation.NonNull;
+
 public class Light {
 
     private String label;
@@ -51,5 +53,15 @@ public class Light {
 
     public void setMote(String mote) {
         this.mote = mote;
+    }
+
+    @NonNull
+    public String toString() {
+        return "Light{" +
+                "label='" + label + '\'' +
+                ", value=" + value +
+                ", timestamp=" + timestamp +
+                ", mote='" + mote + '\'' +
+                '}';
     }
 }

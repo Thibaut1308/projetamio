@@ -1,14 +1,7 @@
 package com.example.projetamio.requests;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.util.JsonReader;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.projetamio.MainActivity;
-import com.example.projetamio.R;
 import com.example.projetamio.objects.Light;
 
 import java.io.BufferedReader;
@@ -20,16 +13,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetLights extends AsyncTask<Void, Void, String> {
-    @SuppressLint("StaticFieldLeak")
-    private final Context mainActivity;
+public class GetLights {
 
-    public GetLights(Context context) {
-        this.mainActivity = context;
+    public static final String LIGHT_BROADCAST_ACTION = "lightBroadcastAction";
+
+    public GetLights() {
     }
 
-    @Override
-    protected String doInBackground(Void... params) {
+
+    public static String last() {
         // URL de la requête GET
         String urlString = "http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/light1/last";
 
@@ -70,33 +62,34 @@ public class GetLights extends AsyncTask<Void, Void, String> {
         } catch (IOException e) {
             // Gérer l'échec de la requête
             e.printStackTrace();
-            return "Échec de la requête";
+            return "Erreur dans de la requête";
         }
     }
 
-    @Override
-    protected void onPostExecute(String response) {
-        if (response != null) {
-            if (response.startsWith("Erreur HTTP")) {
-                Toast.makeText(mainActivity, response, Toast.LENGTH_SHORT).show();
-            }else{
-                List<Light> lights = null;
-                try {
-                    lights = parseJSONToLights(response);
-                } catch (IOException e) {
-                    Toast.makeText(mainActivity, "Erreur lors du parse de la réponse", Toast.LENGTH_SHORT).show();
-                    throw new RuntimeException(e);
-                }
+    /**
+     * public void postExecution(String response) {
+     * if (response != null) {
+     * if (response.startsWith("Erreur HTTP")) {
+     * Toast.makeText(mainActivity, response, Toast.LENGTH_SHORT).show();
+     * }else{
+     * List<Light> lights = null;
+     * try {
+     * lights = parseJSONToLights(response);
+     * } catch (IOException e) {
+     * Toast.makeText(mainActivity, "Erreur lors du parse de la réponse", Toast.LENGTH_SHORT).show();
+     * throw new RuntimeException(e);
+     * }
+     * <p>
+     * TextView tv = ((MainActivity)this.mainActivity).findViewById(R.id.TVMOTE153111);
+     * tv.setText("Lights: dernière valeur "+ lights.get(0).getValue() + " mesurée à " + lights.get(0).getTimestamp());
+     * }
+     * } else {
+     * Toast.makeText(mainActivity, "Échec de la requête", Toast.LENGTH_SHORT).show();
+     * }
+     * }
+     */
 
-                TextView tv = ((MainActivity)this.mainActivity).findViewById(R.id.TVLIGHTS);
-                tv.setText("Lights: dernière valeur "+ lights.get(0).getValue() + " mesurée à " + lights.get(0).getTimestamp());
-            }
-        } else {
-            Toast.makeText(mainActivity, "Échec de la requête", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private List<Light> parseJSONToLights(String jsonData) throws IOException {
+    public static List<Light> parseJSONToLights(String jsonData) throws IOException {
         JsonReader reader = new JsonReader(new StringReader(jsonData));
         List<Light> lights = new ArrayList<>();
         reader.beginObject();

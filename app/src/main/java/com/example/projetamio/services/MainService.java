@@ -2,9 +2,18 @@ package com.example.projetamio.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.projetamio.MainActivity;
+import com.example.projetamio.objects.Light;
+import com.example.projetamio.requests.GetLights;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,11 +51,21 @@ public class MainService extends Service {
             @Override
             public void run() {
                 Log.d("MainService", "Récupération des lumières.");
-                // GetLights getLights = new GetLights();
-                // getLights.execute();
-                // TODO
+                String response = GetLights.last();
+                if (response.contains("Erreur")) {
+                    Intent intent = new Intent();
+                    intent.setAction("light-response");
+                    intent.putExtra("response", response);
+                    sendBroadcast(intent);
+                }else{
+                    showToastOnUIThread("Lumières récupérées", Toast.LENGTH_SHORT);
+                }
             }
         }, 0, 20000);
+    }
+
+    private void showToastOnUIThread(final String message, final int duration) {
+        new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(MainService.this, message, duration).show());
     }
 
     public void stopTimer() {

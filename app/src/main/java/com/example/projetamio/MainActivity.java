@@ -1,17 +1,25 @@
 package com.example.projetamio;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetamio.objects.Light;
+import com.example.projetamio.requests.GetLights;
 import com.example.projetamio.services.MainService;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,12 +27,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREF_CHECKBOX_STATE = "checkbox_state"; // Clé pour sauvegarder l'état de la CheckBox
     private Intent mainServiceIntent;
 
+    private Intent lightBroadcastReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainServiceIntent = new Intent(this, MainService.class);
         setContentView(R.layout.activity_main);
         this.registerListener();
+        this.registerBroadcastReceiver();
 
     }
 
@@ -70,4 +81,36 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
         });
     }
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    private void registerBroadcastReceiver() {
+
+        IntentFilter light_broadcast_filters = new IntentFilter(GetLights.LIGHT_BROADCAST_ACTION);
+        this.lightBroadcastReceiver = this.registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String response = intent.getStringExtra("response");
+
+                try {
+                    List<Light> lights = GetLights.parseJSONToLights(response);
+                    for (Light l: lights) {
+                        switch (l.getMote()) {
+                            case "153.111":
+                                TextView mote1result = findViewById(R.id.TVMOTE153111RESULT);
+                                mote1result.setText((int) l.getValue());
+                            case "81.77":
+                                TextView mote2result = findViewById(R.id.TVMOTE8177RESULT);
+                                mote2result.setText((int)l.getValue());
+                            case "9.138":
+                                TextView mote3result = findViewById(R.id.TVMOTE9138RESULT);
+                                mote3result.setText((int)l.getValue());
+                        }
+                    }
+                    // TODO Vérifier que ça change bien les valeurs
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "Erreur de parsing de la réponse", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, light_broadcast_filters);
+    }
+
 }
