@@ -65,6 +65,7 @@
         android:layout_marginEnd="84dp"
         android:text="None"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,71 +100,74 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/TVMOTE153111"
+        android:id="@+id/TVMOTE111130"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="500dp"
-        android:text="Mote 153.111 :"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="212dp"
+        android:text="Mote 1:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVMOTE8177"
+        android:id="@+id/TVMOTE32131"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="480dp"
-        android:text="Mote 81.77 :"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="232dp"
+        android:text="Mote 2 :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TVMOTE9138"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="460dp"
-        android:text="Mote 9.138 :"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="252dp"
+        android:text="Mote 3 :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVMOTE153111RESULT"
+        android:id="@+id/TVMOTE111130RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="212dp"
         android:text="No value"
-        app:layout_constraintStart_toEndOf="@+id/TVMOTE153111"
-        app:layout_constraintTop_toTopOf="@+id/TVMOTE153111" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVMOTE8177RESULT"
+        android:id="@+id/TVMOTE32131RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="234dp"
         android:text="No value"
-        app:layout_constraintStart_toStartOf="@+id/TVMOTE153111RESULT"
-        app:layout_constraintTop_toBottomOf="@+id/TVMOTE153111RESULT" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TVMOTE9138RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="252dp"
         android:text="No value"
-        app:layout_constraintStart_toStartOf="@+id/TVMOTE8177RESULT"
-        app:layout_constraintTop_toBottomOf="@+id/TVMOTE153111RESULT" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/LIGHTTITLE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="167dp"
         android:text="LIGHTS"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/TVMOTE153111"
-        app:layout_constraintStart_toStartOf="@+id/TVMOTE153111" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

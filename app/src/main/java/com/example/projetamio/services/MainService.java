@@ -20,7 +20,6 @@ import java.util.TimerTask;
 public class MainService extends Service {
 
     private Timer timer;
-
     public MainService() {
     }
 
@@ -50,15 +49,15 @@ public class MainService extends Service {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Log.d("MainService", "Récupération des lumières.");
                 String response = GetLights.last();
                 if (response.contains("Erreur")) {
+                    showToastOnUIThread(response, Toast.LENGTH_SHORT);
+                }else{
                     Intent intent = new Intent();
-                    intent.setAction("light-response");
+                    intent.setAction(GetLights.LIGHT_BROADCAST_ACTION);
                     intent.putExtra("response", response);
                     sendBroadcast(intent);
-                }else{
-                    showToastOnUIThread("Lumières récupérées", Toast.LENGTH_SHORT);
+                    Log.d("MainService", "Récupération des lumières");
                 }
             }
         }, 0, 20000);
