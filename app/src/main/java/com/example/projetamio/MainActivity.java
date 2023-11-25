@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,9 @@ import com.example.projetamio.requests.GetLights;
 import com.example.projetamio.services.MainService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREF_CHECKBOX_STATE = "checkbox_state"; // Clé pour sauvegarder l'état de la CheckBox
     private Intent mainServiceIntent;
     private Intent lightBroadcastReceiver;
+
+    private final List<int[]> resultTextViewIds = new ArrayList<>(
+            Arrays.asList(
+                    new int[]{R.id.TVMOTE1,R.id.TVMOTE1RESULT},
+                    new int[]{R.id.TVMOTE2,R.id.TVMOTE2RESULT},
+                    new int[]{R.id.TVMOTE3,R.id.TVMOTE3RESULT},
+                    new int[]{R.id.TVMOTE4, R.id.TVMOTE4RESULT},
+                    new int[]{R.id.TVMOTE5, R.id.TVMOTE5RESULT},
+                    new int[]{R.id.TVMOTE6, R.id.TVMOTE6RESULT},
+                    new int[]{R.id.TVMOTE7, R.id.TVMOTE7RESULT},
+                    new int[]{R.id.TVMOTE8, R.id.TVMOTE8RESULT},
+                    new int[]{R.id.TVMOTE9, R.id.TVMOTE9RESULT},
+                    new int[]{R.id.TVMOTE10, R.id.TVMOTE10RESULT}
+            )
+    );
 
     private int notifyId = 0;
     public Map<String, Double> previousLights = new HashMap<>();
@@ -97,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String response = intent.getStringExtra("response");
-
                 try {
                     List<Light> lights = GetLights.parseJSONToLights(response);
                     for (Light l : lights) {
@@ -105,24 +123,26 @@ public class MainActivity extends AppCompatActivity {
                         if (previousLights.containsKey(l.getMote())) {
                             double previousValue = previousLights.get(l.getMote());
                             if (Math.abs(l.getValue() - previousValue) > 50) {
-                                showNotification("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
-                                sendEmail("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
+                                if (isWeekday() && isTimeBetween(19, 23)) {
+                                    showNotification("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
+                                }
+                                if ((isWeekend() && isTimeBetween(19, 23)) || (isWeekday() && isTimeBetween(23, 6))) {
+                                    sendEmail("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
+                                }
                             }
                         }
                         previousLights.put(l.getMote(), l.getValue());
-                        switch (l.getMote()) {
-                            case "111.130":
-                                TextView mote1result = findViewById(R.id.TVMOTE111130RESULT);
-                                mote1result.setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
-                                break;
-                            case "32.131":
-                                TextView mote2result = findViewById(R.id.TVMOTE32131RESULT);
-                                mote2result.setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
-                                break;
-                            case "9.138":
-                                TextView mote3result = findViewById(R.id.TVMOTE9138RESULT);
-                                mote3result.setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
-                                break;
+                        int[] currentMote = resultTextViewIds.stream().filter(textViewId -> ((TextView)findViewById(textViewId[0])).getText().toString().equals("Mote " + l.getMote() + ":")).findFirst().orElse(null);
+                        if(currentMote == null) {
+                            int[] availableTextView = resultTextViewIds.stream().filter(textView -> ((TextView)findViewById(textView[0])).getText().toString().isEmpty()).findFirst().orElse(null);
+                            if(availableTextView == null) {
+                                Log.d("MainActivity", "Affichage limité à 10. Impossible d'afficher toutes les résultats");
+                            }else{
+                                ((TextView)findViewById(availableTextView[0])).setText("Mote " + l.getMote() + ":");
+                                ((TextView)findViewById(availableTextView[1])).setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
+                            }
+                        }else{
+                            ((TextView)findViewById(currentMote[1])).setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
                         }
                     }
                 } catch (IOException e) {
@@ -160,5 +180,23 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT, corps);
 
         startActivity(Intent.createChooser(intent,"Send mail..."));
+    }
+
+    private boolean isWeekday() {
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return (dayOfWeek >= Calendar.MONDAY && dayOfWeek <= Calendar.FRIDAY);
+    }
+
+    private boolean isWeekend() {
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
+    }
+
+    private boolean isTimeBetween(int startHour, int endHour) {
+        Calendar calendar = Calendar.getInstance();
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        return (currentHour >= startHour && currentHour <= endHour);
     }
 }

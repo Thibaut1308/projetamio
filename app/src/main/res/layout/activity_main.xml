@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ACTIVITY"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -10,37 +11,37 @@
         android:id="@+id/TV1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="46dp"
-        android:layout_marginEnd="140dp"
         android:text="Service status:"
-        app:layout_constraintEnd_toStartOf="@+id/TV2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TV3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="36dp"
         android:text="Last result:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/TV1" />
 
     <TextView
         android:id="@+id/TV5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="36dp"
         android:text="Last alert:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/TV3" />
 
     <TextView
         android:id="@+id/TV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="290dp"
+        android:layout_marginStart="270dp"
         android:layout_marginTop="46dp"
         android:text="Arrêté"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,24 +51,21 @@
         android:id="@+id/TV4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="36dp"
         android:text="None"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/TV2" />
 
     <TextView
         android:id="@+id/TV6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="288dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="84dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="36dp"
         android:text="None"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/TV4" />
 
     <ToggleButton
         android:id="@+id/BTN1"
@@ -100,64 +98,60 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/TVMOTE111130"
+        android:id="@+id/TVMOTE1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="212dp"
-        android:text="Mote 1:"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="22dp"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/LIGHTTITLE" />
 
     <TextView
-        android:id="@+id/TVMOTE32131"
+        android:id="@+id/TVMOTE2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="232dp"
-        android:text="Mote 2 :"
+        android:layout_marginStart="28dp"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE1" />
 
     <TextView
-        android:id="@+id/TVMOTE9138"
+        android:id="@+id/TVMOTE3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="252dp"
-        android:text="Mote 3 :"
+        android:layout_marginStart="28dp"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE2" />
 
     <TextView
-        android:id="@+id/TVMOTE111130RESULT"
+        android:id="@+id/TVMOTE1RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="212dp"
-        android:text="No value"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE1"
+        app:layout_constraintTop_toBottomOf="@+id/LIGHTTITLE" />
 
     <TextView
-        android:id="@+id/TVMOTE32131RESULT"
+        android:id="@+id/TVMOTE2RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="234dp"
-        android:text="No value"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE2"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE1RESULT" />
 
     <TextView
-        android:id="@+id/TVMOTE9138RESULT"
+        android:id="@+id/TVMOTE3RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="252dp"
-        android:text="No value"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE3"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE2RESULT" />
 
     <TextView
         android:id="@+id/LIGHTTITLE"
@@ -169,5 +163,133 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMOTE4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE3" />
+
+    <TextView
+        android:id="@+id/TVMOTE4RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE4"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE3RESULT" />
+
+    <TextView
+        android:id="@+id/TVMOTE5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE4" />
+
+    <TextView
+        android:id="@+id/TVMOTE5RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE5"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE4RESULT" />
+
+    <TextView
+        android:id="@+id/TVMOTE6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="213dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE1RESULT"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMOTE6RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="213dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVMOTE7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE2RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE6" />
+
+    <TextView
+        android:id="@+id/TVMOTE7RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE7"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE6RESULT" />
+
+    <TextView
+        android:id="@+id/TVMOTE8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE3RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE7" />
+
+    <TextView
+        android:id="@+id/TVMOTE8RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE8"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE7RESULT" />
+
+    <TextView
+        android:id="@+id/TVMOTE9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE4RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE8" />
+
+    <TextView
+        android:id="@+id/TVMOTE9RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE9"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE8RESULT" />
+
+    <TextView
+        android:id="@+id/TVMOTE10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE5RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE9" />
+
+    <TextView
+        android:id="@+id/TVMOTE10RESULT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/TVMOTE10"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE9RESULT" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
