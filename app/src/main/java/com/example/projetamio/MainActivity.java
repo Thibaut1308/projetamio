@@ -19,13 +19,13 @@ import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.preference.PreferenceManager;
 
 import com.example.projetamio.objects.Light;
 import com.example.projetamio.requests.GetLights;
 import com.example.projetamio.services.MainService;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         notificationManager.createNotificationChannel(channel);
         this.registerListener();
         this.registerBroadcastReceiver();
-
+        findViewById(R.id.BTN_SETTINGS).setOnClickListener(view -> openSettings());
     }
 
     @Override
@@ -121,6 +121,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String response = intent.getStringExtra("response");
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                Calendar weekdayNotificationTimeStartMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekday_notification_time_start", 0), "Europe/Paris");
+                Calendar weekdayNotificationTimeEndMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekday_notification_time_end", 0), "Europe/Paris");
+                Calendar weekendNotificationTimeStartMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekend_notification_time_start", 0), "Europe/Paris");
+                Calendar weekendNotificationTimeEndMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekend_notification_time_end", 0), "Europe/Paris");
+                Calendar weekdayEmailTimeStartMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekday_email_time_start", 0), "Europe/Paris");
+                Calendar weekdayEmailTimeEndMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekday_email_time_end", 0), "Europe/Paris");
+                Calendar weekendEmailTimeStartMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekend_email_time_start", 0), "Europe/Paris");
+                Calendar weekendEmailTimeEndMinutes = getCalendarFromMinutes(sharedPreferences.getInt("weekend_email_time_end", 0), "Europe/Paris");
+
                 try {
                     List<Light> lights = GetLights.parseJSONToLights(response);
                     for (Light l : lights) {
@@ -128,12 +138,14 @@ public class MainActivity extends AppCompatActivity {
                         if (previousLights.containsKey(l.getMote())) {
                             double previousValue = previousLights.get(l.getMote());
                             if (Math.abs(l.getValue() - previousValue) > 50) {
-                                if (isWeekday() && isTimeBetween(19, 23)) {
+                                if (((isWeekday() && isTimeBetween(weekdayNotificationTimeStartMinutes, weekdayNotificationTimeEndMinutes)) ||
+                                        (isWeekend() && isTimeBetween(weekendNotificationTimeStartMinutes, weekendNotificationTimeEndMinutes))) && sharedPreferences.getBoolean("send_notifications", false)) {
                                     showNotification("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
                                     // Mise à jour last alert
                                     setActualDate(R.id.TV6);
                                 }
-                                if ((isWeekend() && isTimeBetween(19, 23)) || (isWeekday() && isTimeBetween(23, 6))) {
+                                if (((isWeekend() && isTimeBetween(weekendEmailTimeStartMinutes, weekendEmailTimeEndMinutes)) ||
+                                        (isWeekday() && isTimeBetween(weekdayEmailTimeStartMinutes, weekdayEmailTimeEndMinutes))) && sharedPreferences.getBoolean("send_email", false)) {
                                     sendEmail("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
                                     // Mise à jour last alert
                                     setActualDate(R.id.TV6);
@@ -161,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, light_broadcast_filters);
+    }
+
+    private void openSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     @SuppressLint("MissingPermission")
@@ -205,15 +222,27 @@ public class MainActivity extends AppCompatActivity {
         return (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
     }
 
-    private boolean isTimeBetween(int startHour, int endHour) {
-        Calendar calendar = Calendar.getInstance();
-        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-        return (currentHour >= startHour && currentHour <= endHour);
+    private boolean isTimeBetween(Calendar startTime, Calendar endTime) {
+        Calendar currentCalendar = Calendar.getInstance();
+        return (currentCalendar.compareTo(startTime) >= 0 && currentCalendar.compareTo(endTime) <= 0);
     }
 
     private void setActualDate(int idTv) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRENCH);
         dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
         ((TextView) findViewById(idTv)).setText(dateFormat.format(new Date()));
+    }
+
+    public static Calendar getCalendarFromMinutes(int totalMinutes, String timeZoneId) {
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
+
+        Calendar calendar = Calendar.getInstance(timeZone);
+        calendar.set(Calendar.HOUR_OF_DAY, hours);
+        calendar.set(Calendar.MINUTE, minutes);
+
+        return calendar;
     }
 }

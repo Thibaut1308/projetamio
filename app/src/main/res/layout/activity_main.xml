@@ -77,16 +77,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ToggleButton
-        android:id="@+id/BTN2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="238dp"
-        android:layout_marginBottom="48dp"
-        android:text="ToggleButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <CheckBox
         android:id="@+id/CBSTARTATBOOT"
         android:layout_width="172dp"
@@ -289,5 +279,15 @@
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/TVMOTE10"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE9RESULT" />
+
+    <Button
+        android:id="@+id/BTN_SETTINGS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="48dp"
+        android:text="Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BTN1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,60 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="800dp">
+
+    <PreferenceCategory
+        app:title="@string/alerts_header">
+
+        <SwitchPreferenceCompat
+            app:key="send_notifications"
+            app:title="@string/send_notifications_title" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekday_notification_time_start"
+            app:title="@string/weekday_notification_time_title_start"
+            app:dialogTitle="@string/choose_time" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekday_notification_time_end"
+            app:title="@string/weekday_notification_time_title_end"
+            app:dialogTitle="@string/choose_time" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekend_notification_time_start"
+            app:title="@string/weekend_notification_time_title_start"
+            app:dialogTitle="@string/choose_time" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekend_notification_time_end"
+            app:title="@string/weekend_notification_time_title_end"
+            app:dialogTitle="@string/choose_time" />
+
+        <SwitchPreferenceCompat
+            app:key="send_email"
+            app:title="@string/send_email_title" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekday_email_time_start"
+            app:title="@string/weekday_email_time_title_start"
+            app:dialogTitle="@string/choose_time" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekday_email_time_end"
+            app:title="@string/weekday_email_time_title_end"
+            app:summary="%s"
+            app:dialogTitle="@string/choose_time" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekend_email_time_start"
+            app:title="@string/weekend_email_time_title_start"
+            app:dialogTitle="@string/choose_time" />
+
+        <com.example.projetamio.utils.TimePickerPreference
+            app:key="weekend_email_time_end"
+            app:title="@string/weekend_email_time_title_end"
+            app:dialogTitle="@string/choose_time" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
