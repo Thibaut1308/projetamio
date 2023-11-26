@@ -41,7 +41,7 @@
         android:id="@+id/TV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="270dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="46dp"
         android:text="Arrêté"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:id="@+id/TV4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="270dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="36dp"
         android:text="None"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
         android:id="@+id/TV6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="270dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="36dp"
         android:text="None"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +101,7 @@
         android:id="@+id/TVMOTE1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:layout_marginTop="22dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
         android:id="@+id/TVMOTE2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE1" />
@@ -120,7 +120,7 @@
         android:id="@+id/TVMOTE3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE2" />
@@ -168,7 +168,7 @@
         android:id="@+id/TVMOTE4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE3" />
@@ -186,7 +186,7 @@
         android:id="@+id/TVMOTE5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE4" />
@@ -204,29 +204,27 @@
         android:id="@+id/TVMOTE6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="213dp"
+        android:layout_marginStart="57dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@+id/TVMOTE1RESULT"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE5" />
 
     <TextView
         android:id="@+id/TVMOTE6RESULT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="213dp"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/TVMOTE6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/TVMOTE5RESULT" />
 
     <TextView
         android:id="@+id/TVMOTE7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@+id/TVMOTE2RESULT"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE6" />
 
     <TextView
@@ -242,9 +240,9 @@
         android:id="@+id/TVMOTE8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@+id/TVMOTE3RESULT"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE7" />
 
     <TextView
@@ -260,9 +258,9 @@
         android:id="@+id/TVMOTE9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@+id/TVMOTE4RESULT"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE8" />
 
     <TextView
@@ -278,9 +276,9 @@
         android:id="@+id/TVMOTE10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="57dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@+id/TVMOTE5RESULT"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMOTE9" />
 
     <TextView

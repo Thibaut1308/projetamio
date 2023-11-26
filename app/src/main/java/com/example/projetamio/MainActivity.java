@@ -25,12 +25,17 @@ import com.example.projetamio.requests.GetLights;
 import com.example.projetamio.services.MainService;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     private final List<int[]> resultTextViewIds = new ArrayList<>(
             Arrays.asList(
-                    new int[]{R.id.TVMOTE1,R.id.TVMOTE1RESULT},
-                    new int[]{R.id.TVMOTE2,R.id.TVMOTE2RESULT},
-                    new int[]{R.id.TVMOTE3,R.id.TVMOTE3RESULT},
+                    new int[]{R.id.TVMOTE1, R.id.TVMOTE1RESULT},
+                    new int[]{R.id.TVMOTE2, R.id.TVMOTE2RESULT},
+                    new int[]{R.id.TVMOTE3, R.id.TVMOTE3RESULT},
                     new int[]{R.id.TVMOTE4, R.id.TVMOTE4RESULT},
                     new int[]{R.id.TVMOTE5, R.id.TVMOTE5RESULT},
                     new int[]{R.id.TVMOTE6, R.id.TVMOTE6RESULT},
@@ -125,25 +130,31 @@ public class MainActivity extends AppCompatActivity {
                             if (Math.abs(l.getValue() - previousValue) > 50) {
                                 if (isWeekday() && isTimeBetween(19, 23)) {
                                     showNotification("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
+                                    // Mise à jour last alert
+                                    setActualDate(R.id.TV6);
                                 }
                                 if ((isWeekend() && isTimeBetween(19, 23)) || (isWeekday() && isTimeBetween(23, 6))) {
                                     sendEmail("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
+                                    // Mise à jour last alert
+                                    setActualDate(R.id.TV6);
                                 }
                             }
                         }
                         previousLights.put(l.getMote(), l.getValue());
-                        int[] currentMote = resultTextViewIds.stream().filter(textViewId -> ((TextView)findViewById(textViewId[0])).getText().toString().equals("Mote " + l.getMote() + ":")).findFirst().orElse(null);
-                        if(currentMote == null) {
-                            int[] availableTextView = resultTextViewIds.stream().filter(textView -> ((TextView)findViewById(textView[0])).getText().toString().isEmpty()).findFirst().orElse(null);
-                            if(availableTextView == null) {
+                        int[] currentMote = resultTextViewIds.stream().filter(textViewId -> ((TextView) findViewById(textViewId[0])).getText().toString().equals("Mote " + l.getMote() + ":")).findFirst().orElse(null);
+                        if (currentMote == null) {
+                            int[] availableTextView = resultTextViewIds.stream().filter(textView -> ((TextView) findViewById(textView[0])).getText().toString().isEmpty()).findFirst().orElse(null);
+                            if (availableTextView == null) {
                                 Log.d("MainActivity", "Affichage limité à 10. Impossible d'afficher toutes les résultats");
-                            }else{
-                                ((TextView)findViewById(availableTextView[0])).setText("Mote " + l.getMote() + ":");
-                                ((TextView)findViewById(availableTextView[1])).setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
+                            } else {
+                                ((TextView) findViewById(availableTextView[0])).setText("Mote " + l.getMote() + ":");
+                                ((TextView) findViewById(availableTextView[1])).setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
                             }
-                        }else{
-                            ((TextView)findViewById(currentMote[1])).setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
+                        } else {
+                            ((TextView) findViewById(currentMote[1])).setText(l.getValue() + " lx - " + (((int) l.getValue()) > 250 ? "Allumé" : "Eteint"));
                         }
+                        // Mise à jour last result
+                        setActualDate(R.id.TV4);
                     }
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(), "Erreur de parsing de la réponse", Toast.LENGTH_SHORT).show();
@@ -179,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_SUBJECT, sujet);
         intent.putExtra(Intent.EXTRA_TEXT, corps);
 
-        startActivity(Intent.createChooser(intent,"Send mail..."));
+        startActivity(Intent.createChooser(intent, "Send mail..."));
     }
 
     private boolean isWeekday() {
@@ -198,5 +209,11 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         return (currentHour >= startHour && currentHour <= endHour);
+    }
+
+    private void setActualDate(int idTv) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRENCH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
+        ((TextView) findViewById(idTv)).setText(dateFormat.format(new Date()));
     }
 }
