@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void registerBroadcastReceiver() {
-
         IntentFilter light_broadcast_filters = new IntentFilter(GetLights.LIGHT_BROADCAST_ACTION);
         this.lightBroadcastReceiver = this.registerReceiver(new BroadcastReceiver() {
             @Override
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 if (((isWeekend() && isTimeBetween(weekendEmailTimeStartMinutes, weekendEmailTimeEndMinutes)) ||
                                         (isWeekday() && isTimeBetween(weekdayEmailTimeStartMinutes, weekdayEmailTimeEndMinutes))) && sharedPreferences.getBoolean("send_email", false)) {
-                                    sendEmail("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative");
+                                    sendEmail("Changement de luminosité", "La lumière du mote " + l.getMote() + " a changée de manière significative", context);
                                     // Mise à jour last alert
                                     setActualDate(R.id.TV6);
                                 }
@@ -192,17 +191,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("IntentReset")
-    public void sendEmail(String sujet, String corps) {
-        String destinataire = "test@yopmail.com";
+    public void sendEmail(String sujet, String corps, Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String destinataire = sharedPreferences.getString("email_adress", "");
 
-        // Créez une intention ACTION_SEND
         Intent intent = new Intent(Intent.ACTION_SEND);
 
 
         intent.setData(Uri.parse("mail:to"));
         intent.setType("text/plain");
 
-        // Ajoutez l'adresse e-mail du destinataire, le sujet et le corps du message
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{destinataire});
         intent.putExtra(Intent.EXTRA_SUBJECT, sujet);
         intent.putExtra(Intent.EXTRA_TEXT, corps);

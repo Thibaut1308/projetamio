@@ -34,6 +34,11 @@
             app:key="send_email"
             app:title="@string/send_email_title" />
 
+        <EditTextPreference
+            app:key="email_adress"
+            app:title="@string/email_adress">
+        </EditTextPreference>
+
         <com.example.projetamio.utils.TimePickerPreference
             app:key="weekday_email_time_start"
             app:title="@string/weekday_email_time_title_start"

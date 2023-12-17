@@ -28,4 +28,5 @@
     <string name="weekday_email_time_title_end">Weekday end at</string>
     <string name="weekend_email_time_title_start">Weekend start at</string>
     <string name="weekend_email_time_title_end">Weekend end at</string>
+    <string name="email_adress">Email address</string>
 </resources>
